@@ -1,9 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
 
-export const MAXIMUM_PULL_LENGTH = 240 as const;
-export const REFRESH_THRESHOLD = 180 as const;
+export const DEFAULT_MAXIMUM_PULL_LENGTH = 240 as const;
+export const DEFAULT_REFRESH_THRESHOLD = 180 as const;
 
-export type UsePullToRefreshParams = { onRefresh: () => void };
+export type UsePullToRefreshParams = {
+	onRefresh: () => void;
+	// default value is 240
+	maximumPullLength?: number;
+	// default value is 180
+	refreshThreshold?: number;
+};
 export type UsePullToRefreshReturn = {
 	isRefreshing: boolean;
 	pullPosition: number;
@@ -12,7 +18,13 @@ export type UsePullToRefresh = ({
 	onRefresh,
 }: UsePullToRefreshParams) => UsePullToRefreshReturn;
 
-export const usePullToRefresh: UsePullToRefresh = ({ onRefresh }) => {
+const isValid = (maximumPullLength: number, refreshThreshold: number) => maximumPullLength >= refreshThreshold;
+
+export const usePullToRefresh: UsePullToRefresh = ({
+	onRefresh,
+	maximumPullLength = DEFAULT_MAXIMUM_PULL_LENGTH,
+	refreshThreshold = DEFAULT_REFRESH_THRESHOLD,
+}) => {
 	const [pullStartPosition, setPullStartPosition] = useState(0);
 	const [pullPosition, setPullPosition] = useState(0);
 	const [isRefreshing, setIsRefreshing] = useState(false);
@@ -34,7 +46,7 @@ export const usePullToRefresh: UsePullToRefresh = ({ onRefresh }) => {
 					? Math.abs(touch.screenY - pullStartPosition)
 					: 0;
 
-			if (currentPullLength <= MAXIMUM_PULL_LENGTH)
+			if (currentPullLength <= maximumPullLength)
 				return setPullPosition(() => currentPullLength);
 		},
 		[pullStartPosition]
@@ -44,7 +56,7 @@ export const usePullToRefresh: UsePullToRefresh = ({ onRefresh }) => {
 		setPullStartPosition(() => 0);
 		setPullPosition(() => 0);
 
-		if (pullPosition < REFRESH_THRESHOLD) return;
+		if (pullPosition < refreshThreshold) return;
 
 		setIsRefreshing(() => true);
 		setTimeout(onRefresh);
@@ -63,6 +75,13 @@ export const usePullToRefresh: UsePullToRefresh = ({ onRefresh }) => {
 			window.removeEventListener("touchend", onEndPull);
 		};
 	}, [onEndPull, onPulling, onPullStart]);
+
+	useEffect(() => {
+		if (isValid(maximumPullLength, refreshThreshold)) return;
+		console.warn(
+			"'maximumPullLength' should be bigger or equal than 'refreshThreshold'"
+		);
+	}, [maximumPullLength, refreshThreshold]);
 
 	return { isRefreshing, pullPosition };
 };
