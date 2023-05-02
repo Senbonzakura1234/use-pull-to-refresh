@@ -4,7 +4,7 @@
   "description": "A simple React custom hook for pull-to-refresh function that support NextJs",
   "scripts": {
     "build": "tsup index.ts --format cjs,esm --dts",
-    "release": "pnpm run build && changeset publish",
+    "release": "pnpm run build && changeset publish --access public",
     "lint": "tsc"
   },
   "keywords": ["React", "Hook","Typescript", "NextJs"],
