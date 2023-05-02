@@ -1,0 +1,25 @@
+{
+  "name": "use-pull-to-refresh",
+  "version": "1.0.0",
+  "description": "A simple React custom hook for pull-to-refresh function that support NextJs",
+  "scripts": {
+    "build": "tsup index.ts --format cjs,esm --dts",
+    "release": "pnpm run build && changeset publish",
+    "lint": "tsc"
+  },
+  "keywords": ["React", "Hook","Typescript", "NextJs"],
+  "author": "Senbonzakura1234 <anhdungpham090@gmail.com>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "devDependencies": {
+    "@changesets/cli": "^2.26.1",
+    "@types/react": "^18.2.0",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "react": "^18.2.0"
+  }
+}
