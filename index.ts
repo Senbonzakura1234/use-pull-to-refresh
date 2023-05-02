@@ -18,7 +18,8 @@ export type UsePullToRefresh = ({
 	onRefresh,
 }: UsePullToRefreshParams) => UsePullToRefreshReturn;
 
-const isValid = (maximumPullLength: number, refreshThreshold: number) => maximumPullLength >= refreshThreshold;
+const isValid = (maximumPullLength: number, refreshThreshold: number) =>
+	maximumPullLength >= refreshThreshold;
 
 export const usePullToRefresh: UsePullToRefresh = ({
 	onRefresh,
@@ -77,9 +78,14 @@ export const usePullToRefresh: UsePullToRefresh = ({
 	}, [onEndPull, onPulling, onPullStart]);
 
 	useEffect(() => {
-		if (isValid(maximumPullLength, refreshThreshold)) return;
-		console.warn(
-			"'maximumPullLength' should be bigger or equal than 'refreshThreshold'"
+		if (
+			isValid(maximumPullLength, refreshThreshold) ||
+			process.env.NODE_ENV === "production"
+		)
+			return;
+		console.error(
+			"usePullToRefresh",
+			`'maximumPullLength' (currently ${maximumPullLength})  should be bigger or equal than 'refreshThreshold' (currently ${refreshThreshold})`
 		);
 	}, [maximumPullLength, refreshThreshold]);
 
