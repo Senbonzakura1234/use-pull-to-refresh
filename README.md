@@ -121,3 +121,7 @@ type UsePullToRefreshReturn = {
 ## Authors
 
 -  **Senbonzakura1234** - _Initial work_ - [Senbonzakura1234](https://github.com/Senbonzakura1234)
+
+## License
+
+[MIT License](https://github.com/Senbonzakura1234/use-pull-to-refresh/blob/main/LICENSE) © Senbonzakura1234
