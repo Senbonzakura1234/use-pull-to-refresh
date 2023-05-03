@@ -1,7 +1,7 @@
 <h1>Use Pull To Refresh <a href=""><img alt="npm" src="https://img.shields.io/npm/v/use-pull-to-refresh?label="></a></h1>
 <img alt="npm bundle size" src="https://img.shields.io/bundlephobia/min/use-pull-to-refresh">
 <img alt="License" src="https://img.shields.io/npm/l/use-pull-to-refresh">
-<img alt="License" src="https://badgen.net/badge/maintained/yes/green">
+<img alt="is maintained" src="https://badgen.net/badge/maintained/yes/green">
 
 ## Table of contents
 
