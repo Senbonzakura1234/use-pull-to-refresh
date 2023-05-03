@@ -1,5 +1,11 @@
 # use-pull-to-refresh
 
+## 1.3.0
+
+### Minor Changes
+
+- 2587d43: Move @types/node to devDependencies
+
 ## 1.2.0
 
 ### Minor Changes
