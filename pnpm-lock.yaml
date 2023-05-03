@@ -1,9 +1,6 @@
 lockfileVersion: '6.0'
 
 dependencies:
-  '@types/node':
-    specifier: ^18.16.3
-    version: registry.npmjs.org/@types/node@18.16.3
   react:
     specifier: ^18.2.0
     version: registry.npmjs.org/react@18.2.0
@@ -12,6 +9,9 @@ devDependencies:
   '@changesets/cli':
     specifier: ^2.26.1
     version: registry.npmjs.org/@changesets/cli@2.26.1
+  '@types/node':
+    specifier: ^18.16.3
+    version: registry.npmjs.org/@types/node@18.16.3
   '@types/react':
     specifier: ^18.2.0
     version: registry.npmjs.org/@types/react@18.2.0
@@ -641,7 +641,7 @@ packages:
     resolution: {integrity: sha512-OPs5WnnT1xkCBiuQrZA4+YAV4HEJejmHneyraIaxsbev5yCEr6KMwINNFP9wQeFIw8FWcoTqF3vQsa5CDaI+8Q==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@types/node/-/node-18.16.3.tgz}
     name: '@types/node'
     version: 18.16.3
-    dev: false
+    dev: true
 
   registry.npmjs.org/@types/normalize-package-data@2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@types/normalize-package-data/-/normalize-package-data-2.4.1.tgz}
