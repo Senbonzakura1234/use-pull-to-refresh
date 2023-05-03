@@ -9,6 +9,7 @@ export type UsePullToRefreshParams = {
 	maximumPullLength?: number;
 	// default value is 180
 	refreshThreshold?: number;
+	isDisabled?: boolean;
 };
 export type UsePullToRefreshReturn = {
 	isRefreshing: boolean;
@@ -25,12 +26,15 @@ export const usePullToRefresh: UsePullToRefresh = ({
 	onRefresh,
 	maximumPullLength = DEFAULT_MAXIMUM_PULL_LENGTH,
 	refreshThreshold = DEFAULT_REFRESH_THRESHOLD,
+	isDisabled = false,
 }) => {
 	const [pullStartPosition, setPullStartPosition] = useState(0);
 	const [pullPosition, setPullPosition] = useState(0);
 	const [isRefreshing, setIsRefreshing] = useState(false);
 
 	const onPullStart = useCallback(({ targetTouches }: TouchEvent) => {
+		if (isDisabled) return;
+
 		const touch = targetTouches[0];
 
 		if (touch) return setPullStartPosition(touch.screenY);
@@ -38,6 +42,8 @@ export const usePullToRefresh: UsePullToRefresh = ({
 
 	const onPulling = useCallback(
 		({ targetTouches }: TouchEvent) => {
+			if (isDisabled) return;
+
 			const touch = targetTouches[0];
 
 			if (!touch) return;
@@ -54,6 +60,8 @@ export const usePullToRefresh: UsePullToRefresh = ({
 	);
 
 	const onEndPull = useCallback(() => {
+		if (isDisabled) return;
+
 		setPullStartPosition(() => 0);
 		setPullPosition(() => 0);
 
@@ -64,7 +72,7 @@ export const usePullToRefresh: UsePullToRefresh = ({
 	}, [onRefresh, pullPosition]);
 
 	useEffect(() => {
-		if (typeof window === "undefined") return;
+		if (typeof window === "undefined" || isDisabled) return;
 
 		window.addEventListener("touchstart", onPullStart);
 		window.addEventListener("touchmove", onPulling);
@@ -75,19 +83,20 @@ export const usePullToRefresh: UsePullToRefresh = ({
 			window.removeEventListener("touchmove", onPulling);
 			window.removeEventListener("touchend", onEndPull);
 		};
-	}, [onEndPull, onPulling, onPullStart]);
+	}, [onEndPull, onPulling, onPullStart, isDisabled]);
 
 	useEffect(() => {
 		if (
 			isValid(maximumPullLength, refreshThreshold) ||
-			process.env.NODE_ENV === "production"
+			process.env.NODE_ENV === "production" ||
+			isDisabled
 		)
 			return;
 		console.error(
 			"usePullToRefresh",
 			`'maximumPullLength' (currently ${maximumPullLength})  should be bigger or equal than 'refreshThreshold' (currently ${refreshThreshold})`
 		);
-	}, [maximumPullLength, refreshThreshold]);
+	}, [maximumPullLength, refreshThreshold, isDisabled]);
 
 	return { isRefreshing, pullPosition };
 };

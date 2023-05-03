@@ -1,4 +1,24 @@
-# Use Pull To Refresh
+<h1>Use Pull To Refresh <a href=""><img alt="npm" src="https://img.shields.io/npm/v/use-pull-to-refresh?label="></a></h1>
+<img alt="npm bundle size" src="https://img.shields.io/bundlephobia/min/use-pull-to-refresh">
+<img alt="License" src="https://img.shields.io/npm/l/use-pull-to-refresh">
+<img alt="License" src="https://badgen.net/badge/maintained/yes/green">
+
+## Table of contents
+
+-  [Table of contents](#table-of-contents)
+-  [Description](#description)
+-  [Prerequisites](#prerequisites)
+-  [Getting Started](#getting-started)
+   -  [What's the different to other similar packages?](#whats-the-different-to-other-similar-packages)
+-  [Installation](#installation)
+-  [Usage](#usage)
+-  [API](#api)
+   -  [Parameters](#parameters)
+   -  [Return Type](#return-type)
+-  [Authors](#authors)
+-  [License](#license)
+
+## Description
 
 A simple React custom hook for pull-to-refresh function that support [NexJs](https://nextjs.org/) SSR.
 
@@ -7,25 +27,15 @@ A simple React custom hook for pull-to-refresh function that support [NexJs](htt
 This project requires NodeJS (version 16 or later) and NPM.
 [Node](http://nodejs.org/) and [NPM](https://npmjs.org/) are really easy to install.
 
-## Table of contents
-
--  [Project Name](#use-pull-to-refresh)
-
-   -  [Prerequisites](#prerequisites)
-   -  [Table of contents](#table-of-contents)
-   -  [Getting Started](#getting-started)
-   -  [Installation](#installation)
-   -  [Usage](#usage)
-
-   -  [API](#api)
-      -  [Parameters](#parameters)
-      -  [Return Type](#return-type)
-   -  [Authors](#authors)
-   -  [License](#license)
-
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+This custom hooks helps you implement pull-to-refresh feature to your app, it support NextJs SSR that some other package didn't. It also allows support custom Scroll Area that was create by yourself.
+
+### What's the different to other similar packages?
+
+-  [react-pull-to-refresh](https://www.npmjs.com/package/react-pull-to-refresh) : will run into error `'window' is not defined` when using with NextJs SSR.
+-  [react-hooks-pull-to-refresh](https://www.npmjs.com/package/react-hooks-pull-to-refresh), [react-pull-updown-to-refresh](https://www.npmjs.com/package/react-pull-updown-to-refresh), [react-web-pull-to-refresh](https://www.npmjs.com/package/react-web-pull-to-refresh) : Either being unmaintained or doesn't support Typescript, or newer version of React.
+- [react-native-pull-refresh-android](https://www.npmjs.com/package/react-native-pull-refresh-android) : solution only available for react native.
 
 ## Installation
 
@@ -64,9 +74,11 @@ export default function PageRefresh() {
 	const { isReady, reload } = useRouter();
 
 	const { isRefreshing, pullPosition } = usePullToRefresh({
-		onRefresh: () => isReady && reload(),
+		// you can choose what behavior for `onRefresh`, could be calling an API to load more data, or refresh whole page.
+		onRefresh: reload,
 		maximumPullLength: MAXIMUM_PULL_LENGTH,
 		refreshThreshold: REFRESH_THRESHOLD,
+		isDisabled: !isReady,
 	});
 
 	return (
@@ -83,7 +95,7 @@ export default function PageRefresh() {
 					!isRefreshing ? { transform: `rotate(${pullPosition}deg)` } : {}
 				}
 			>
-				<AnySpinnerSVGIcon className="h-full w-full" />
+				<AnySpinnerSVGIconComponentWorks className="h-full w-full" />
 			</div>
 		</div>
 	);
@@ -99,12 +111,14 @@ type UsePullToRefreshParams = {
 	onRefresh: () => void;
 	maximumPullLength?: number;
 	refreshThreshold?: number;
+	isDisabled?: boolean;
 };
 ```
 
-- `onRefresh` (**required**): refresh callback function run when pull event end.
-- `maximumPullLength`: limit how far the refresh icon was pulled down.
-- `refreshThreshold`: `pullPosition` that will trigger `onRefresh` function.
+-  `onRefresh` (**required**): refresh callback function run when pull event end.
+-  `maximumPullLength`: limit how far the refresh icon was pulled down.
+-  `refreshThreshold`: `pullPosition` that will trigger `onRefresh` function.
+-  `isDisabled`: disabling pull function in case the `onRefresh` function is not ready to run.
 
 ### Return Type
 
@@ -115,8 +129,8 @@ type UsePullToRefreshReturn = {
 };
 ```
 
-- `isRefreshing`: indicate refresh callback function is running.
-- `pullPosition`: current pull gesture position.
+-  `isRefreshing`: indicate refresh callback function is running.
+-  `pullPosition`: current pull gesture position.
 
 ## Authors
 
