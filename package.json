@@ -12,10 +12,11 @@
 		"lint": "tsc"
 	},
 	"keywords": [
-		"React",
-		"Hook",
-		"Typescript",
-		"NextJs"
+		"react",
+		"typescript",
+		"ssr",
+		"nextjs",
+		"custom-hook"
 	],
 	"author": "Senbonzakura1234 <anhdungpham090@gmail.com>",
 	"license": "MIT",

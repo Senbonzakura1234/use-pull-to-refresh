@@ -15,6 +15,7 @@
 -  [API](#api)
    -  [Parameters](#parameters)
    -  [Return Type](#return-type)
+-  [Change log](#change-log)
 -  [Authors](#authors)
 -  [License](#license)
 
@@ -24,8 +25,7 @@ A simple React custom hook for pull-to-refresh function that support [NexJs](htt
 
 ## Prerequisites
 
-This project requires NodeJS (version 16 or later) and NPM.
-[Node](http://nodejs.org/) and [NPM](https://npmjs.org/) are really easy to install.
+This project requires NodeJS (version 16 or later) and React 17+
 
 ## Getting Started
 
@@ -131,6 +131,32 @@ type UsePullToRefreshReturn = {
 
 -  `isRefreshing`: indicate refresh callback function is running.
 -  `pullPosition`: current pull gesture position.
+
+## Change Log
+
+### 1.3.0
+
+#### Minor Changes
+
+- 2587d43: Move @types/node to devDependencies
+
+### 1.2.0
+
+#### Minor Changes
+
+- f8dac94: Add isDisabled param in case need to disable pull to refresh.
+
+### 1.1.1
+
+#### Patch Changes
+
+- 90660a8: Make error messgae more clear, supress error message on production env
+
+### 1.1.0
+
+#### Minor Changes
+
+- 9d974e6: Add custom maximumPullLength and refreshThreshold
 
 ## Authors
 
