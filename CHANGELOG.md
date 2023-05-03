@@ -1,5 +1,11 @@
 # use-pull-to-refresh
 
+## 1.4.0
+
+### Minor Changes
+
+- d126a81: Update readme and package's keywords
+
 ## 1.3.0
 
 ### Minor Changes
