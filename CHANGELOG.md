@@ -1,5 +1,11 @@
 # use-pull-to-refresh
 
+## 1.2.0
+
+### Minor Changes
+
+- f8dac94: Add isDisabled param in case need to disable pull to refresh.
+
 ## 1.1.1
 
 ### Patch Changes
