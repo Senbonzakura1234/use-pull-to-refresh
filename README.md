@@ -35,7 +35,7 @@ This custom hooks helps you implement pull-to-refresh feature to your app, it su
 
 -  [react-pull-to-refresh](https://www.npmjs.com/package/react-pull-to-refresh) : will run into error `'window' is not defined` when using with NextJs SSR.
 -  [react-hooks-pull-to-refresh](https://www.npmjs.com/package/react-hooks-pull-to-refresh), [react-pull-updown-to-refresh](https://www.npmjs.com/package/react-pull-updown-to-refresh), [react-web-pull-to-refresh](https://www.npmjs.com/package/react-web-pull-to-refresh) : Either being unmaintained or doesn't support Typescript, or newer version of React.
-- [react-native-pull-refresh-android](https://www.npmjs.com/package/react-native-pull-refresh-android) : solution only available for react native.
+-  [react-native-pull-refresh-android](https://www.npmjs.com/package/react-native-pull-refresh-android) : solution only available for react native.
 
 ## Installation
 
@@ -63,9 +63,9 @@ $ pnpm add use-pull-to-refresh
 
 ### [NexJs](https://nextjs.org/) Example With [TailwindCSS](https://tailwindcss.com/)
 
-```tsx
-import { useRouter } from "next/router";
-import { usePullToRefresh } from "use-pull-to-refresh";
+```jsx
+import { useRouter } from 'next/router';
+import { usePullToRefresh } from 'use-pull-to-refresh';
 
 const MAXIMUM_PULL_LENGTH = 240;
 const REFRESH_THRESHOLD = 180;
@@ -87,15 +87,13 @@ export default function PageRefresh() {
 				top: (isRefreshing ? REFRESH_THRESHOLD : pullPosition) / 3,
 				opacity: isRefreshing || pullPosition > 0 ? 1 : 0,
 			}}
-			className="bg-base-100 fixed inset-x-1/2 z-30 h-8 w-8 -translate-x-1/2 rounded-full p-2 shadow"
+			className='bg-base-100 fixed inset-x-1/2 z-30 h-8 w-8 -translate-x-1/2 rounded-full p-2 shadow'
 		>
 			<div
-				className={`h-full w-full ${isRefreshing ? "animate-spin" : ""}`}
-				style={
-					!isRefreshing ? { transform: `rotate(${pullPosition}deg)` } : {}
-				}
+				className={`h-full w-full ${isRefreshing ? 'animate-spin' : ''}`}
+				style={!isRefreshing ? { transform: `rotate(${pullPosition}deg)` } : {}}
 			>
-				<AnySpinnerSVGIconComponentWorks className="h-full w-full" />
+				<AnySpinnerSVGIconComponentWorksHere className='h-full w-full' />
 			</div>
 		</div>
 	);
@@ -106,7 +104,7 @@ export default function PageRefresh() {
 
 ### Parameters
 
-```ts
+```typescript
 type UsePullToRefreshParams = {
 	onRefresh: () => void;
 	maximumPullLength?: number;
@@ -122,7 +120,7 @@ type UsePullToRefreshParams = {
 
 ### Return Type
 
-```ts
+```typescript
 type UsePullToRefreshReturn = {
 	isRefreshing: boolean;
 	pullPosition: number;
@@ -134,29 +132,41 @@ type UsePullToRefreshReturn = {
 
 ## Change Log
 
+### 2.0.0
+
+#### Major Changes
+
+-  0af3a51: Implement eslint, fix bugs exposed by eslint.
+
+### 1.4.0
+
+#### Minor Changes
+
+-  d126a81: Update readme and package's keywords
+
 ### 1.3.0
 
 #### Minor Changes
 
-- 2587d43: Move @types/node to devDependencies
+-  2587d43: Move @types/node to devDependencies
 
 ### 1.2.0
 
 #### Minor Changes
 
-- f8dac94: Add isDisabled param in case need to disable pull to refresh.
+-  f8dac94: Add isDisabled param in case need to disable pull to refresh.
 
 ### 1.1.1
 
 #### Patch Changes
 
-- 90660a8: Make error messgae more clear, supress error message on production env
+-  90660a8: Make error messgae more clear, supress error message on production env
 
 ### 1.1.0
 
 #### Minor Changes
 
-- 9d974e6: Add custom maximumPullLength and refreshThreshold
+-  9d974e6: Add custom maximumPullLength and refreshThreshold
 
 ## Authors
 

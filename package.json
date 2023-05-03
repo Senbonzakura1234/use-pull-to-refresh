@@ -7,9 +7,10 @@
 		"type": "git"
 	},
 	"scripts": {
-		"build": "tsup index.ts --format cjs,esm --dts",
+		"build": "tsup src/index.ts --format cjs,esm --dts",
 		"release": "pnpm run build && changeset publish",
-		"lint": "tsc"
+		"lint": "tsc && pnpm run lint:fix",
+		"lint:fix": "eslint --ext .js,.jsx,.ts,.tsx,.json . --fix"
 	},
 	"keywords": [
 		"react",
@@ -27,6 +28,20 @@
 		"@changesets/cli": "^2.26.1",
 		"@types/node": "^18.16.3",
 		"@types/react": "^18.2.0",
+		"@typescript-eslint/eslint-plugin": "^5.59.2",
+		"@typescript-eslint/parser": "^5.59.2",
+		"eslint": "^8.39.0",
+		"eslint-config-next": "^13.3.4",
+		"eslint-config-prettier": "^8.8.0",
+		"eslint-plugin-import": "^2.27.5",
+		"eslint-plugin-json": "^3.1.0",
+		"eslint-plugin-jsx-a11y": "^6.7.1",
+		"eslint-plugin-markdown": "^3.0.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"eslint-plugin-simple-import-sort": "^10.0.0",
+		"eslint-plugin-tailwindcss": "^3.11.0",
+		"eslint-plugin-unused-imports": "^2.0.0",
+		"prettier": "^2.8.8",
 		"tsup": "^6.7.0",
 		"typescript": "^5.0.4"
 	},

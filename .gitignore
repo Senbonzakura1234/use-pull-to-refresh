@@ -1,2 +1,11 @@
+# general
 node_modules
 dist
+.env
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+

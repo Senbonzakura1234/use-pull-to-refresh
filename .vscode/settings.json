@@ -1,0 +1,84 @@
+{
+	"cSpell.diagnosticLevel": "Hint",
+	"cSpell.ignorePaths": [
+		"**/node_modules/**",
+		"**/.vscode/extensions.json",
+		".env",
+		"**/dist/**",
+		"**/prisma/**"
+	],
+	"cSpell.words": [
+		"clsx",
+		"daisyui",
+		"escha",
+		"gsap",
+		"headlessui",
+		"heroicons",
+		"meruru",
+		"nextjs",
+		"pnpx",
+		"ryza",
+		"Senbonzakura",
+		"shallie",
+		"superjson",
+		"tabler-icons-react",
+		"tailwindcss",
+		"tanstack",
+		"trpc",
+		"tsbuildinfo",
+		"tsconfigs",
+		"vsicons"
+	],
+	"css.lint.unknownAtRules": "ignore",
+	"editor.codeActionsOnSave": {
+		"source.fixAll": true,
+		"source.organizeImports": true
+	},
+	"editor.formatOnSave": true,
+	"editor.formatOnSaveMode": "file",
+	"editor.rulers": [120],
+	"eslint.codeActionsOnSave.mode": "all",
+	"eslint.format.enable": true,
+	"eslint.lintTask.enable": true,
+	"eslint.packageManager": "pnpm",
+	"files.associations": {
+		"*.eslintrc": "json",
+		"*.json": "json",
+		"*.prettierrc": "json",
+		"*.webmanifest": "json"
+	},
+	"typescript.tsdk": "node_modules\\typescript\\lib",
+	"vsicons.associations.files": [
+		{
+			"extensions": [
+				"settings.json",
+				"setting.json",
+				"extensions.json",
+				"extension.json"
+			],
+			"filename": true,
+			"format": "svg",
+			"icon": "vscode"
+		},
+		{
+			"extensions": ["package.json"],
+			"filename": true,
+			"format": "svg",
+			"icon": "node"
+		},
+		{
+			"extensions": ["tsbuildinfo"],
+			"format": "svg",
+			"icon": "tsconfig_official",
+			"overrides": "tsbuildinfo"
+		},
+		{
+			"extensions": ["env.mjs"],
+			"filename": true,
+			"format": "svg",
+			"icon": "config",
+			"overrides": "mjs"
+		}
+	],
+	"vsicons.presets.tsOfficial": true
+}
