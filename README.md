@@ -21,7 +21,7 @@
 
 ## Description
 
-A simple React custom hook for pull-to-refresh function that support [NexJs](https://nextjs.org/) SSR.
+A simple React custom hook for pull-to-refresh function that support [NextJs](https://nextjs.org/) SSR.
 
 ## Prerequisites
 
@@ -29,7 +29,7 @@ This project requires NodeJS (version 16 or later) and React 17+
 
 ## Getting Started
 
-This custom hooks helps you implement pull-to-refresh feature to your app, it support NextJs SSR that some other package didn't. It also allows support custom Scroll Area that was create by yourself.
+This custom hook helps you implement the pull-to-refresh feature in your app. It supports NextJs SSR that some other packages don't. It also allows support of a custom Scroll Area that was created by yourself.
 
 ### What's the different to other similar packages?
 
@@ -61,7 +61,7 @@ $ pnpm add use-pull-to-refresh
 
 ## Usage
 
-### [NexJs](https://nextjs.org/) Example With [TailwindCSS](https://tailwindcss.com/)
+### [NextJs](https://nextjs.org/) Example With [TailwindCSS](https://tailwindcss.com/)
 
 ```jsx
 import { useRouter } from 'next/router';
@@ -132,41 +132,7 @@ type UsePullToRefreshReturn = {
 
 ## Change Log
 
-### 2.0.0
-
-#### Major Changes
-
--  0af3a51: Implement eslint, fix bugs exposed by eslint.
-
-### 1.4.0
-
-#### Minor Changes
-
--  d126a81: Update readme and package's keywords
-
-### 1.3.0
-
-#### Minor Changes
-
--  2587d43: Move @types/node to devDependencies
-
-### 1.2.0
-
-#### Minor Changes
-
--  f8dac94: Add isDisabled param in case need to disable pull to refresh.
-
-### 1.1.1
-
-#### Patch Changes
-
--  90660a8: Make error messgae more clear, supress error message on production env
-
-### 1.1.0
-
-#### Minor Changes
-
--  9d974e6: Add custom maximumPullLength and refreshThreshold
+-  [Pleach check here](https://github.com/Senbonzakura1234/use-pull-to-refresh/blob/main/CHANGELOG.md)
 
 ## Authors
 
