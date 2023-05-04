@@ -1,5 +1,11 @@
 # use-pull-to-refresh
 
+## 2.0.1
+
+### Patch Changes
+
+-  39af3b5: Update Readme.md fix typo
+
 ## 2.0.0
 
 ### Major Changes
