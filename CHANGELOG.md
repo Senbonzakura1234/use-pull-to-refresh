@@ -1,5 +1,11 @@
 # use-pull-to-refresh
 
+## 2.0.2
+
+### Patch Changes
+
+-  6fd9e50: Refactor code: remove uneccessary as const, remove uneccessary return, and some other minor fix.
+
 ## 2.0.1
 
 ### Patch Changes
