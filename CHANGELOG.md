@@ -1,5 +1,11 @@
 # use-pull-to-refresh
 
+## 2.1.0
+
+### Minor Changes
+
+-  f05fc1b: Add passive = true for AddEventListenerOptions param
+
 ## 2.0.2
 
 ### Patch Changes
