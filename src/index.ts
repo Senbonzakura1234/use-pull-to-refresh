@@ -4,7 +4,7 @@ export const DEFAULT_MAXIMUM_PULL_LENGTH = 240;
 export const DEFAULT_REFRESH_THRESHOLD = 180;
 
 export type UsePullToRefreshParams = {
-	onRefresh: () => void;
+	onRefresh: () => void | Promise<void>;
 	// default value is 240
 	maximumPullLength?: number;
 	// default value is 180
@@ -24,7 +24,7 @@ export const usePullToRefresh: UsePullToRefresh = ({
 	maximumPullLength = DEFAULT_MAXIMUM_PULL_LENGTH,
 	refreshThreshold = DEFAULT_REFRESH_THRESHOLD,
 	isDisabled = false,
-}) => {
+}: UsePullToRefreshParams) => {
 	const [pullStartPosition, setPullStartPosition] = useState(0);
 	const [pullPosition, setPullPosition] = useState(0);
 	const [isRefreshing, setIsRefreshing] = useState(false);
@@ -37,7 +37,7 @@ export const usePullToRefresh: UsePullToRefresh = ({
 
 			if (touch) setPullStartPosition(touch.screenY);
 		},
-		[isDisabled],
+		[isDisabled, setPullStartPosition],
 	);
 
 	const onPulling = useCallback(
@@ -50,7 +50,8 @@ export const usePullToRefresh: UsePullToRefresh = ({
 
 			const currentPullLength = pullStartPosition < touch.screenY ? Math.abs(touch.screenY - pullStartPosition) : 0;
 
-			if (currentPullLength <= maximumPullLength) setPullPosition(() => currentPullLength);
+			if (currentPullLength <= maximumPullLength && pullStartPosition < window.screen.height / 3)
+				setPullPosition(() => currentPullLength);
 		},
 		[isDisabled, maximumPullLength, pullStartPosition],
 	);
@@ -63,23 +64,26 @@ export const usePullToRefresh: UsePullToRefresh = ({
 
 		if (pullPosition < refreshThreshold) return;
 
-		setIsRefreshing(() => true);
-		setTimeout(onRefresh);
+		setIsRefreshing(true);
+		setTimeout(async () => {
+			await onRefresh();
+			setIsRefreshing(false);
+		}, 500);
 	}, [isDisabled, onRefresh, pullPosition, refreshThreshold]);
 
 	useEffect(() => {
 		if (typeof window === 'undefined' || isDisabled) return;
 
-		window.addEventListener('touchstart', onPullStart);
-		window.addEventListener('touchmove', onPulling);
-		window.addEventListener('touchend', onEndPull);
+		window.addEventListener('touchstart', onPullStart, { passive: true });
+		window.addEventListener('touchmove', onPulling, { passive: true });
+		window.addEventListener('touchend', onEndPull, { passive: true });
 
 		return () => {
 			window.removeEventListener('touchstart', onPullStart);
 			window.removeEventListener('touchmove', onPulling);
 			window.removeEventListener('touchend', onEndPull);
 		};
-	}, [onEndPull, onPulling, onPullStart, isDisabled]);
+	}, [isDisabled, onEndPull, onPullStart, onPulling]);
 
 	useEffect(() => {
 		if (isValid(maximumPullLength, refreshThreshold) || process.env.NODE_ENV === 'production' || isDisabled) return;
