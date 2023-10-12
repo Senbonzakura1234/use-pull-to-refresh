@@ -87,7 +87,7 @@ export const usePullToRefresh: UsePullToRefresh = ({
 
 	useEffect(() => {
 		if (isValid(maximumPullLength, refreshThreshold) || process.env.NODE_ENV === 'production' || isDisabled) return;
-		console.error(
+		console.warn(
 			'usePullToRefresh',
 			`'maximumPullLength' (currently ${maximumPullLength})  should be bigger or equal than 'refreshThreshold' (currently ${refreshThreshold})`,
 		);
