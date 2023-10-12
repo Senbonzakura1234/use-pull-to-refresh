@@ -1,5 +1,12 @@
 # use-pull-to-refresh
 
+## 2.2.1
+
+### Patch Changes
+
+-  4319d5a: Refactor code
+-  63ad4ed: Refactor code.
+
 ## 2.2.0
 
 ### Minor Changes
