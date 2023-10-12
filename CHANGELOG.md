@@ -1,5 +1,11 @@
 # use-pull-to-refresh
 
+## 2.2.0
+
+### Minor Changes
+
+-  d5135c2: Update package version, refactor code.
+
 ## 2.1.0
 
 ### Minor Changes
