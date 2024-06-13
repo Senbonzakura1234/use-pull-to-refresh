@@ -37,7 +37,7 @@ export const usePullToRefresh: UsePullToRefresh = ({
 
 			if (touch) setPullStartPosition(touch.screenY);
 		},
-		[isDisabled, setPullStartPosition],
+		[isDisabled],
 	);
 
 	const onPulling = useCallback(
