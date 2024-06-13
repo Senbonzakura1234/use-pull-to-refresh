@@ -74,15 +74,17 @@ export const usePullToRefresh: UsePullToRefresh = ({
 	useEffect(() => {
 		if (typeof window === 'undefined' || isDisabled) return;
 
-		window.addEventListener('touchstart', onPullStart, { passive: true });
-		window.addEventListener('touchmove', onPulling, { passive: true });
-		window.addEventListener('touchend', onEndPull, { passive: true });
-
-		return () => {
-			window.removeEventListener('touchstart', onPullStart);
-			window.removeEventListener('touchmove', onPulling);
-			window.removeEventListener('touchend', onEndPull);
+		const ac = new AbortController();
+		const options = {
+			passive: true,
+			signal: ac.signal,
 		};
+
+		window.addEventListener('touchstart', onPullStart, options);
+		window.addEventListener('touchmove', onPulling, options);
+		window.addEventListener('touchend', onEndPull, options);
+
+		return () => void ac.abort();
 	}, [isDisabled, onEndPull, onPullStart, onPulling]);
 
 	useEffect(() => {
