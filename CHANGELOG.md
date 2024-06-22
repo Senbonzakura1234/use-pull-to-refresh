@@ -1,5 +1,11 @@
 # use-pull-to-refresh
 
+## 2.3.2
+
+### Patch Changes
+
+-  36aaf47: Update react peer dep
+
 ## 2.3.1
 
 ### Patch Changes
