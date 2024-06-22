@@ -1,61 +1,31 @@
 {
 	"cSpell.diagnosticLevel": "Hint",
-	"cSpell.ignorePaths": [
-		"**/node_modules/**",
-		"**/.vscode/extensions.json",
-		".env",
-		"**/dist/**",
-		"**/prisma/**"
-	],
-	"cSpell.words": [
-		"clsx",
-		"daisyui",
-		"escha",
-		"gsap",
-		"headlessui",
-		"heroicons",
-		"meruru",
-		"nextjs",
-		"pnpx",
-		"ryza",
-		"Senbonzakura",
-		"shallie",
-		"superjson",
-		"tabler-icons-react",
-		"tailwindcss",
-		"tanstack",
-		"trpc",
-		"tsbuildinfo",
-		"tsconfigs",
-		"vsicons"
-	],
-	"css.lint.unknownAtRules": "ignore",
+	"cSpell.ignorePaths": ["**/node_modules/**", "**/.vscode/extensions.json", ".env", "**/dist/**", "**/.next/**"],
+	"cSpell.words": ["nextjs", "pnpx", "Senbonzakura", "tsbuildinfo", "tsconfigs", "vsicons"],
 	"editor.codeActionsOnSave": {
-		"source.fixAll": true,
-		"source.organizeImports": true
+		"source.fixAll": "explicit",
+		"source.organizeImports": "explicit"
 	},
 	"editor.formatOnSave": true,
 	"editor.formatOnSaveMode": "file",
+	"editor.inlayHints.enabled": "on",
+	"editor.quickSuggestions": {
+		"strings": true
+	},
 	"editor.rulers": [120],
 	"eslint.codeActionsOnSave.mode": "all",
 	"eslint.format.enable": true,
 	"eslint.lintTask.enable": true,
-	"eslint.packageManager": "pnpm",
-	"files.associations": {
-		"*.eslintrc": "json",
-		"*.json": "json",
-		"*.prettierrc": "json",
-		"*.webmanifest": "json"
-	},
+	"npm.packageManager": "pnpm",
+	"typescript.inlayHints.enumMemberValues.enabled": true,
+	"typescript.inlayHints.parameterNames.enabled": "all",
+	"typescript.inlayHints.parameterNames.suppressWhenArgumentMatchesName": true,
+	"typescript.inlayHints.propertyDeclarationTypes.enabled": true,
+	"typescript.inlayHints.variableTypes.suppressWhenTypeMatchesName": true,
 	"typescript.tsdk": "node_modules\\typescript\\lib",
 	"vsicons.associations.files": [
 		{
-			"extensions": [
-				"settings.json",
-				"setting.json",
-				"extensions.json",
-				"extension.json"
-			],
+			"extensions": ["settings.json", "setting.json", "extensions.json", "extension.json"],
 			"filename": true,
 			"format": "svg",
 			"icon": "vscode"
@@ -71,13 +41,6 @@
 			"format": "svg",
 			"icon": "tsconfig_official",
 			"overrides": "tsbuildinfo"
-		},
-		{
-			"extensions": ["env.mjs"],
-			"filename": true,
-			"format": "svg",
-			"icon": "config",
-			"overrides": "mjs"
 		}
 	],
 	"vsicons.presets.tsOfficial": true

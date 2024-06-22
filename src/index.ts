@@ -23,7 +23,7 @@ export const usePullToRefresh: UsePullToRefresh = ({
 	onRefresh,
 	maximumPullLength = DEFAULT_MAXIMUM_PULL_LENGTH,
 	refreshThreshold = DEFAULT_REFRESH_THRESHOLD,
-	isDisabled = false,
+	isDisabled = false
 }: UsePullToRefreshParams) => {
 	const [pullStartPosition, setPullStartPosition] = useState(0);
 	const [pullPosition, setPullPosition] = useState(0);
@@ -37,7 +37,7 @@ export const usePullToRefresh: UsePullToRefresh = ({
 
 			if (touch) setPullStartPosition(touch.screenY);
 		},
-		[isDisabled, setPullStartPosition],
+		[isDisabled, setPullStartPosition]
 	);
 
 	const onPulling = useCallback(
@@ -53,7 +53,7 @@ export const usePullToRefresh: UsePullToRefresh = ({
 			if (currentPullLength <= maximumPullLength && pullStartPosition < window.screen.height / 3)
 				setPullPosition(() => currentPullLength);
 		},
-		[isDisabled, maximumPullLength, pullStartPosition],
+		[isDisabled, maximumPullLength, pullStartPosition]
 	);
 
 	const onEndPull = useCallback(() => {
@@ -65,8 +65,11 @@ export const usePullToRefresh: UsePullToRefresh = ({
 		if (pullPosition < refreshThreshold) return;
 
 		setIsRefreshing(true);
-		setTimeout(async () => {
-			await onRefresh();
+		setTimeout(() => {
+			const cb = onRefresh();
+
+			if (typeof cb === 'object') return void cb.finally(() => setIsRefreshing(false));
+
 			setIsRefreshing(false);
 		}, 500);
 	}, [isDisabled, onRefresh, pullPosition, refreshThreshold]);
@@ -89,7 +92,7 @@ export const usePullToRefresh: UsePullToRefresh = ({
 		if (isValid(maximumPullLength, refreshThreshold) || process.env.NODE_ENV === 'production' || isDisabled) return;
 		console.warn(
 			'usePullToRefresh',
-			`'maximumPullLength' (currently ${maximumPullLength})  should be bigger or equal than 'refreshThreshold' (currently ${refreshThreshold})`,
+			`'maximumPullLength' (currently ${maximumPullLength})  should be bigger or equal than 'refreshThreshold' (currently ${refreshThreshold})`
 		);
 	}, [maximumPullLength, refreshThreshold, isDisabled]);
 
