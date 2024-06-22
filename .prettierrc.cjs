@@ -8,6 +8,6 @@ module.exports = {
 	printWidth: 120,
 	singleQuote: true,
 	tabWidth: 3,
-	trailingComma: 'all',
-	useTabs: true,
+	trailingComma: 'none',
+	useTabs: true
 };
