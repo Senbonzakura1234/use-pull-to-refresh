@@ -1,5 +1,11 @@
 # use-pull-to-refresh
 
+## 2.3.0
+
+### Minor Changes
+
+-  771d6b5: Change dependencies of react package. Refactor code.
+
 ## 2.2.1
 
 ### Patch Changes
