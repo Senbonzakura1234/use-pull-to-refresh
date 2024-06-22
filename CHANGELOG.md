@@ -1,5 +1,11 @@
 # use-pull-to-refresh
 
+## 2.3.1
+
+### Patch Changes
+
+-  6433c20: Use AbortController to cancel events, Remove dependency because setState callbacks are stable, Update CI
+
 ## 2.3.0
 
 ### Minor Changes
