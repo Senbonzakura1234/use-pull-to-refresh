@@ -7,6 +7,7 @@
 
 -  [Table of contents](#table-of-contents)
 -  [Description](#description)
+-  [Purposes](#purposes)
 -  [Prerequisites](#prerequisites)
 -  [Getting Started](#getting-started)
    -  [What's the different to other similar packages?](#whats-the-different-to-other-similar-packages)
@@ -22,6 +23,13 @@
 ## Description
 
 A simple React custom hook for pull-to-refresh function that support [NextJs](https://nextjs.org/) SSR.
+
+## Purposes
+
+Lots of web application needs custom scroll area for various reasons, however since we are not using browser native scroll,
+the native pull to refresh API is unusable since it's tied to the scroll event on `html` tag. This hooks is the solution to
+resolve this issue by recreating the native pull top behavior while also let you choose what proccess to run on each pull
+event end.
 
 ## Prerequisites
 
@@ -78,14 +86,14 @@ export default function PageRefresh() {
 		onRefresh: reload,
 		maximumPullLength: MAXIMUM_PULL_LENGTH,
 		refreshThreshold: REFRESH_THRESHOLD,
-		isDisabled: !isReady,
+		isDisabled: !isReady
 	});
 
 	return (
 		<div
 			style={{
 				top: (isRefreshing ? REFRESH_THRESHOLD : pullPosition) / 3,
-				opacity: isRefreshing || pullPosition > 0 ? 1 : 0,
+				opacity: isRefreshing || pullPosition > 0 ? 1 : 0
 			}}
 			className='bg-base-100 fixed inset-x-1/2 z-30 h-8 w-8 -translate-x-1/2 rounded-full p-2 shadow'
 		>

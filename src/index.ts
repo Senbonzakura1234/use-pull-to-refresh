@@ -37,7 +37,7 @@ export const usePullToRefresh: UsePullToRefresh = ({
 
 			if (touch) setPullStartPosition(touch.screenY);
 		},
-		[isDisabled],
+		[isDisabled]
 	);
 
 	const onPulling = useCallback(
@@ -80,7 +80,7 @@ export const usePullToRefresh: UsePullToRefresh = ({
 		const ac = new AbortController();
 		const options = {
 			passive: true,
-			signal: ac.signal,
+			signal: ac.signal
 		};
 
 		window.addEventListener('touchstart', onPullStart, options);
