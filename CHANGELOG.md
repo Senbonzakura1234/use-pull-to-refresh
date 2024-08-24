@@ -1,5 +1,11 @@
 # use-pull-to-refresh
 
+## 2.3.3
+
+### Patch Changes
+
+-  a2a8cfd: Update dev dependencies version, update Readme document.
+
 ## 2.3.2
 
 ### Patch Changes
