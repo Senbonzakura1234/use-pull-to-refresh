@@ -1,5 +1,11 @@
 # use-pull-to-refresh
 
+## 2.4.0
+
+### Minor Changes
+
+-  660933d: Migrate from pnpm to npm
+
 ## 2.3.3
 
 ### Patch Changes
