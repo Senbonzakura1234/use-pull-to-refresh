@@ -16,7 +16,7 @@
 	"eslint.codeActionsOnSave.mode": "all",
 	"eslint.format.enable": true,
 	"eslint.lintTask.enable": true,
-	"npm.packageManager": "pnpm",
+	"npm.packageManager": "npm",
 	"typescript.inlayHints.enumMemberValues.enabled": true,
 	"typescript.inlayHints.parameterNames.enabled": "all",
 	"typescript.inlayHints.parameterNames.suppressWhenArgumentMatchesName": true,

@@ -8,9 +8,9 @@
 	},
 	"scripts": {
 		"build": "tsup src/index.ts --format cjs,esm --dts",
-		"pre-commit": "pnpm changeset",
-		"release": "pnpm run build && changeset publish",
-		"lint": "tsc && pnpm run lint:fix",
+		"pre-commit": "npx changeset",
+		"release": "npm run build && npx changeset version && npx changeset publish",
+		"lint": "tsc && npm run lint:fix",
 		"lint:fix": "eslint --ext .js,.jsx,.ts,.tsx,.json . --fix"
 	},
 	"keywords": [
