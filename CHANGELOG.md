@@ -1,5 +1,11 @@
 # use-pull-to-refresh
 
+## 2.4.1
+
+### Patch Changes
+
+-  4ec1ba9: Update packages version, change recommened extentions list.
+
 ## 2.4.0
 
 ### Minor Changes
