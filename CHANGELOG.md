@@ -1,5 +1,11 @@
 # use-pull-to-refresh
 
+## 3.0.0
+
+### Major Changes
+
+-  1cf1779: Add Custom Scroll Container instead of attacht to window element only, support SSR stable by using globalThis object
+
 ## 2.4.1
 
 ### Patch Changes

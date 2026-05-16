@@ -1,6 +1,6 @@
 {
 	"name": "use-pull-to-refresh",
-	"version": "2.4.1",
+	"version": "3.0.0",
 	"description": "A simple React custom hook for pull-to-refresh function that support NextJs",
 	"repository": {
 		"url": "https://github.com/Senbonzakura1234/use-pull-to-refresh.git",
