@@ -117,7 +117,7 @@ import { useRef } from 'react';
 import { usePullToRefresh } from 'use-pull-to-refresh';
 
 export default function CustomScrollArea() {
-	const scrollContainerRef = useRef<HTMLDivElement>(null);
+	const scrollContainerRef = useRef < HTMLDivElement > null;
 
 	const { isRefreshing, pullPosition } = usePullToRefresh({
 		onRefresh: async () => {
@@ -128,10 +128,7 @@ export default function CustomScrollArea() {
 	});
 
 	return (
-		<div
-			ref={scrollContainerRef}
-			className='h-screen overflow-y-auto'
-		>
+		<div ref={scrollContainerRef} className='h-screen overflow-y-auto'>
 			{/* Your scrollable content */}
 		</div>
 	);
@@ -144,19 +141,21 @@ export default function CustomScrollArea() {
 
 ```typescript
 type UsePullToRefreshParams<T extends HTMLElement> = {
-	onRefresh: () => void | Promise<void>;
+	onRefresh?: () => void | Promise<void>;
 	maximumPullLength?: number;
 	refreshThreshold?: number;
 	isDisabled?: boolean;
-	elementRef?: React.RefObject<T>;
+	elementRef?: React.RefObject<T | null>;
+	enableDebug?: boolean;
 };
 ```
 
--  `onRefresh` (**required**): refresh callback function run when pull event end. Can be async or return a promise.
+-  `onRefresh`: optional refresh callback function run when pull event end. Can be async or return a promise.
 -  `maximumPullLength`: limit how far the refresh icon was pulled down. (default: 240)
 -  `refreshThreshold`: `pullPosition` that will trigger `onRefresh` function. (default: 180)
--  `isDisabled`: disabling pull function in case the `onRefresh` function is not ready to run.
+-  `isDisabled`: disabling pull function in case you want to temporarily disable the hook. (default: false)
 -  `elementRef`: optional ref to a custom scroll container element. If provided, pull-to-refresh will be attached to that element instead of the window.
+-  `enableDebug`: enable console warnings for validation issues like invalid configuration. (default: false)
 
 ### Return Type
 
