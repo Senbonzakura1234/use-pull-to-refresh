@@ -1,10 +1,15 @@
 # use-pull-to-refresh
 
-## 3.0.1
+## 3.0.2
 
 ### Patch Changes
 
 -  1e9bc39: feat: add enableResistance parameter for progressive pull dampening
+
+## 3.0.1
+
+### Patch Changes
+
 -  e33f3d4: perf: refactor pull-to-refresh with useRef optimization and optional callback
 
 ## 3.0.0
