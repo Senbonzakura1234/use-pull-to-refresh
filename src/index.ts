@@ -3,28 +3,30 @@ import { useCallback, useEffect, useState } from 'react';
 export const DEFAULT_MAXIMUM_PULL_LENGTH = 240;
 export const DEFAULT_REFRESH_THRESHOLD = 180;
 
-export type UsePullToRefreshParams = {
+export type UsePullToRefreshParams<T extends HTMLElement> = {
 	onRefresh: () => void | Promise<void>;
 	// default value is 240
 	maximumPullLength?: number;
 	// default value is 180
 	refreshThreshold?: number;
 	isDisabled?: boolean;
+	elementRef?: React.RefObject<T>;
 };
 export type UsePullToRefreshReturn = {
 	isRefreshing: boolean;
 	pullPosition: number;
 };
-export type UsePullToRefresh = (params: UsePullToRefreshParams) => UsePullToRefreshReturn;
+export type UsePullToRefresh = typeof usePullToRefresh;
 
 const isValid = (maximumPullLength: number, refreshThreshold: number) => maximumPullLength >= refreshThreshold;
 
-export const usePullToRefresh: UsePullToRefresh = ({
+export const usePullToRefresh = <T extends HTMLElement>({
 	onRefresh,
 	maximumPullLength = DEFAULT_MAXIMUM_PULL_LENGTH,
 	refreshThreshold = DEFAULT_REFRESH_THRESHOLD,
-	isDisabled = false
-}: UsePullToRefreshParams) => {
+	isDisabled = false,
+	elementRef
+}: UsePullToRefreshParams<T>) => {
 	const [pullStartPosition, setPullStartPosition] = useState(0);
 	const [pullPosition, setPullPosition] = useState(0);
 	const [isRefreshing, setIsRefreshing] = useState(false);
@@ -50,10 +52,13 @@ export const usePullToRefresh: UsePullToRefresh = ({
 
 			const currentPullLength = pullStartPosition < touch.screenY ? Math.abs(touch.screenY - pullStartPosition) : 0;
 
-			if (currentPullLength <= maximumPullLength && pullStartPosition < window.screen.height / 3)
+			const elementHeight = elementRef?.current?.offsetHeight || globalThis?.window?.screen.height || 0;
+
+			if (currentPullLength <= maximumPullLength && pullStartPosition < elementHeight / 3) {
 				setPullPosition(() => currentPullLength);
+			}
 		},
-		[isDisabled, maximumPullLength, pullStartPosition]
+		[elementRef, isDisabled, maximumPullLength, pullStartPosition]
 	);
 
 	const onEndPull = useCallback(() => {
@@ -75,23 +80,41 @@ export const usePullToRefresh: UsePullToRefresh = ({
 	}, [isDisabled, onRefresh, pullPosition, refreshThreshold]);
 
 	useEffect(() => {
-		if (typeof window === 'undefined' || isDisabled) return;
+		if (isDisabled) return;
 
 		const ac = new AbortController();
+
 		const options = {
 			passive: true,
 			signal: ac.signal
 		};
 
-		window.addEventListener('touchstart', onPullStart, options);
-		window.addEventListener('touchmove', onPulling, options);
-		window.addEventListener('touchend', onEndPull, options);
+		const element = elementRef?.current;
+
+		if (element) {
+			element.addEventListener('touchstart', onPullStart, options);
+			element.addEventListener('touchmove', onPulling, options);
+			element.addEventListener('touchend', onEndPull, options);
+
+			return () => {
+				element.removeEventListener('touchstart', onPullStart);
+				element.removeEventListener('touchmove', onPulling);
+				element.removeEventListener('touchend', onEndPull);
+			};
+		}
+
+		if (typeof globalThis?.window === 'undefined') return;
+
+		globalThis?.window?.addEventListener('touchstart', onPullStart, options);
+		globalThis?.window?.addEventListener('touchmove', onPulling, options);
+		globalThis?.window?.addEventListener('touchend', onEndPull, options);
 
 		return () => void ac.abort();
-	}, [isDisabled, onEndPull, onPullStart, onPulling]);
+	}, [elementRef, isDisabled, onEndPull, onPullStart, onPulling]);
 
 	useEffect(() => {
 		if (isValid(maximumPullLength, refreshThreshold) || process.env.NODE_ENV === 'production' || isDisabled) return;
+
 		console.warn(
 			'usePullToRefresh',
 			`'maximumPullLength' (currently ${maximumPullLength})  should be bigger or equal than 'refreshThreshold' (currently ${refreshThreshold})`
