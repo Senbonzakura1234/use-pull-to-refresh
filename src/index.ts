@@ -4,18 +4,30 @@ export const DEFAULT_MAXIMUM_PULL_LENGTH = 240;
 export const DEFAULT_REFRESH_THRESHOLD = 180;
 
 export type UsePullToRefreshParams<T extends HTMLElement> = {
+	// Callback function that is called when a refresh is triggered. Can return a Promise for async operations.
 	onRefresh?: () => void | Promise<void>;
+
 	// default value is 240
 	maximumPullLength?: number;
+
 	// default value is 180
 	refreshThreshold?: number;
+
 	isDisabled?: boolean;
+
+	// If not provided, the hook will attach listeners to the global window object. This is useful for full-page pull-to-refresh. For scrollable containers, pass a ref to the container element.
 	elementRef?: React.RefObject<T | null>;
+
 	enableDebug?: boolean;
+
+	//  Applies a progressive dampening effect the further you pull
+	enableResistance?: boolean;
 };
 
 export type UsePullToRefreshReturn = {
 	isRefreshing: boolean;
+
+	// Current pull position in pixels, which can be used to create a visual pull effect. Resets to 0 when not pulling.
 	pullPosition: number;
 };
 
@@ -29,7 +41,8 @@ export const usePullToRefresh = <T extends HTMLElement>({
 	refreshThreshold = DEFAULT_REFRESH_THRESHOLD,
 	isDisabled = false,
 	elementRef,
-	enableDebug = false
+	enableDebug = false,
+	enableResistance = false
 }: UsePullToRefreshParams<T>): UsePullToRefreshReturn => {
 	const [pullPosition, setPullPosition] = useState(0);
 	const [isRefreshing, setIsRefreshing] = useState(false);
@@ -67,14 +80,23 @@ export const usePullToRefresh = <T extends HTMLElement>({
 			const touch = e.targetTouches[0];
 			if (!touch) return;
 
-			const currentPullLength = touch.screenY > pullStartRef.current ? touch.screenY - pullStartRef.current : 0;
+			const rawPullLength = touch.screenY > pullStartRef.current ? touch.screenY - pullStartRef.current : 0;
+
+			// Calculate progressive resistance (rubber-banding)
+			let currentPullLength = rawPullLength;
+
+			if (enableResistance) {
+				// As rawPullLength increases, the multiplier decreases, creating a "heavy" feel
+				const resistanceMultiplier = 1 - Math.min(rawPullLength / (maximumPullLength * 2.5), 0.8);
+				currentPullLength = rawPullLength * resistanceMultiplier;
+			}
 
 			if (currentPullLength <= maximumPullLength) {
 				pullPositionRef.current = currentPullLength;
 				setPullPosition(currentPullLength);
 			}
 		},
-		[isDisabled, maximumPullLength]
+		[isDisabled, maximumPullLength, enableResistance]
 	);
 
 	const onEndPull = useCallback(() => {
@@ -101,10 +123,11 @@ export const usePullToRefresh = <T extends HTMLElement>({
 
 			void (cb as Promise<void>).finally(() => setIsRefreshing(false));
 		} catch (error) {
-			console.error('Error during refresh:', error);
+			if (enableDebug) console.error('Error during refresh:', error);
+
 			setIsRefreshing(false);
 		}
-	}, [isDisabled, onRefresh, refreshThreshold]);
+	}, [isDisabled, onRefresh, refreshThreshold, enableDebug]);
 
 	useEffect(() => {
 		if (isDisabled) return;

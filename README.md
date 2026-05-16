@@ -147,6 +147,7 @@ type UsePullToRefreshParams<T extends HTMLElement> = {
 	isDisabled?: boolean;
 	elementRef?: React.RefObject<T | null>;
 	enableDebug?: boolean;
+	enableResistance?: boolean;
 };
 ```
 
@@ -156,6 +157,7 @@ type UsePullToRefreshParams<T extends HTMLElement> = {
 -  `isDisabled`: disabling pull function in case you want to temporarily disable the hook. (default: false)
 -  `elementRef`: optional ref to a custom scroll container element. If provided, pull-to-refresh will be attached to that element instead of the window.
 -  `enableDebug`: enable console warnings for validation issues like invalid configuration. (default: false)
+-  `enableResistance`: applies a progressive dampening/rubber-banding effect the further you pull, creating a native-like feel. (default: false)
 
 ### Return Type
 
@@ -166,8 +168,8 @@ type UsePullToRefreshReturn = {
 };
 ```
 
--  `isRefreshing`: indicate refresh callback function is running.
--  `pullPosition`: current pull gesture position.
+-  `isRefreshing`: indicates whether the refresh callback function is currently running.
+-  `pullPosition`: current pull position in pixels. Can be used to create visual pull effects like rotating an icon or translating a container. Resets to 0 when not pulling.
 
 ## Change Log
 
